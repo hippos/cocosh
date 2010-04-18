@@ -194,7 +194,6 @@
     buffer = calloc([epipe length]+1, sizeof(char));
     [epipe getBytes:buffer length:[epipe length]];
     NSString *edesc = [NSString stringWithCString:buffer encoding:NSASCIIStringEncoding];
-    NSLog(@"%@", [edesc description]);
     NSAlert  *alert =
       [NSAlert alertWithMessageText:NSLocalizedString(@"run error",
                                                       @"") defaultButton:@"OK" alternateButton:nil otherButton:nil
