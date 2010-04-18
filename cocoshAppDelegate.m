@@ -188,25 +188,33 @@
   [shell waitUntilExit];
 
   NSData *epipe = [[piperr fileHandleForReading] readDataToEndOfFile];
+  char* buffer;
   if ([epipe length] > 0)
   {
-    NSString *edesc = [NSString stringWithCString:[epipe bytes] length:[epipe length]];
+    buffer = calloc([epipe length]+1, sizeof(char));
+    [epipe getBytes:buffer length:[epipe length]];
+    NSString *edesc = [NSString stringWithCString:buffer encoding:NSASCIIStringEncoding];
     NSLog(@"%@", [edesc description]);
     NSAlert  *alert =
       [NSAlert alertWithMessageText:NSLocalizedString(@"run error",
                                                       @"") defaultButton:@"OK" alternateButton:nil otherButton:nil
        informativeTextWithFormat:[edesc description]];
     [alert runModal];
+    free(buffer);
+    return;
   }
 
   NSData   *spipe      = [[pipstd fileHandleForReading] readDataToEndOfFile];
-  NSString *resultText = [NSString stringWithCString:[spipe bytes] length:[spipe length]];
+  buffer = calloc([spipe length]+1, sizeof(char));
+  [spipe getBytes:buffer length:[spipe length]];
+  NSString *resultText = [NSString stringWithCString:buffer encoding:NSASCIIStringEncoding];
 
   [outputdescription selectAll:nil];
   NSRange start = [outputdescription selectedRange];
   NSRange end   = NSMakeRange(start.length, 0);
   [outputdescription setSelectedRange:end];
   [outputdescription insertText:resultText];
+  free(buffer);
 }
 
 #pragma mark PROPERTY
