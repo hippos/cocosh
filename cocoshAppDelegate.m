@@ -153,7 +153,7 @@
   }
   
   NSString *dest   =
-    [[appPath stringByAppendingPathComponent:@"cocosh"] stringByAppendingPathExtension:ext];
+    [[path stringByAppendingPathComponent:@"cocosh"] stringByAppendingPathExtension:ext];
 
   if ([[NSFileManager defaultManager] fileExistsAtPath:dest] == YES)
   {
