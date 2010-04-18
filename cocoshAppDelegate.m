@@ -193,7 +193,7 @@
   {
     buffer = calloc([epipe length]+1, sizeof(char));
     [epipe getBytes:buffer length:[epipe length]];
-    NSString *edesc = [NSString stringWithCString:buffer encoding:NSASCIIStringEncoding];
+    NSString *edesc = [NSString stringWithCString:buffer encoding:NSUTF8StringEncoding];
     NSAlert  *alert =
       [NSAlert alertWithMessageText:NSLocalizedString(@"run error",
                                                       @"") defaultButton:@"OK" alternateButton:nil otherButton:nil
@@ -206,7 +206,7 @@
   NSData   *spipe      = [[pipstd fileHandleForReading] readDataToEndOfFile];
   buffer = calloc([spipe length]+1, sizeof(char));
   [spipe getBytes:buffer length:[spipe length]];
-  NSString *resultText = [NSString stringWithCString:buffer encoding:NSASCIIStringEncoding];
+  NSString *resultText = [NSString stringWithCString:buffer encoding:NSUTF8StringEncoding];
 
   [outputdescription selectAll:nil];
   NSRange start = [outputdescription selectedRange];
