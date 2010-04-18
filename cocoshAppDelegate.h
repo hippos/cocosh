@@ -28,11 +28,11 @@
 - (IBAction) changeScript:(id)sender;
 - (IBAction) clearOutput:(id)sender;
 
-- (BOOL) appSetup;
-- (void) setAppSupportDirectory;
+- (BOOL)      appSetup;
+- (void)      setAppSupportDirectory;
 
 - (BOOL)      applicationSupporDirectory;
-- (void)setPath:(NSString *)value;
+- (void)      setPath:(NSString *)value;
 - (NSString *)path;
 
 @property (assign) IBOutlet NSWindow      *window;
